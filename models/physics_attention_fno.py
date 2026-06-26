@@ -47,7 +47,7 @@ class AttentionSpectralConv2d(nn.Module):
         x = torch.fft.irfft2(out_ft, s=(x.size(-2), x.size(-1)))
         return x
 
-# Tried adding physics constraints directly into the FNO architecture, but it didn't work well. Instead, we apply hard physics constraints after the model's output.
+# Tried adding physics constraints directly into the FNO architecture, but it didn't work well. Instead, we apply hard physics constraints during training.
 
 class PhysicsAttentionFNO(nn.Module):
     def __init__(self, max_modes=32, width=64, num_in_channels=3, num_out_channels=3):
