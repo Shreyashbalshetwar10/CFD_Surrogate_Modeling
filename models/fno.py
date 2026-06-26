@@ -2,26 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class UnitGaussianNormalizer_old(object):
-    def __init__(self, x, eps=1e-5):
-        super(UnitGaussianNormalizer_old, self).__init__()
-        self.eps = eps
-        self.mean = torch.mean(x, dim=(0, 2, 3), keepdim=True)
-        self.std = torch.std(x, dim=(0, 2, 3), keepdim=True)
-
-    def encode(self, x):
-        x = (x - self.mean) / (self.std + self.eps)
-        return x
-
-    def decode(self, x):
-        x = (x * (self.std + self.eps)) + self.mean
-        return x
-        
-    def to(self, device):
-        self.mean = self.mean.to(device)
-        self.std = self.std.to(device)
-        return self
-
 class UnitGaussianNormalizer(object):
     def __init__(self, x, eps=1e-5):
         super(UnitGaussianNormalizer, self).__init__()
